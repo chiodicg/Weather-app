@@ -1,0 +1,93 @@
+h1 {
+  font-size: 40px;
+  text-align: center;
+}
+
+h2,
+#place {
+  color: #22566b;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  text-align: center;
+}
+
+footer {
+  color: #22566b;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+.container {
+  border: 1px solid linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  border-radius: 10px;
+  padding: 50px;
+  background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+  margin-top: 30px;
+}
+
+#date-time,
+#description {
+  color: #22566b;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+
+.today,
+.days1,
+.days2,
+.days3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  color: #22566b;
+  text-align: center;
+}
+
+.go {
+  background-color: #62caf7;
+  border: 1px solid #62caf7;
+}
+.go:hover {
+  background-color: #377792;
+  border: 1px solid #377792;
+}
+
+.geolocation {
+  color: #377792;
+  border: 1px solid #377792;
+}
+
+.geolocation:hover {
+  background-color: #377792;
+  border: 1px solid #377792;
+}
+
+.fa-cloud-showers-heavy {
+  color: #828e93;
+}
+
+.fa-cloud-sun {
+  color: #f7c07e;
+}
+
+.fa-sun {
+  color: #f49200;
+}
+
+.fa-snowflake {
+  color: #4b7e96;
+}
+
+.fa-wind {
+  color: #91b4c6;
+}
+
+.fa-cloud-sun-rain {
+  color: #ead891;
+}
+
+.humid-wind {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  color: #22566b;
+  text-align: center;
+}

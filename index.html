@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forecast</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="src/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/7ef2e64fbb.js"
+      crossorigin="anonymous"
+    ></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+            <form class="row align-items-center" id="search-form">
+              <div class="col-md-6 form-group">
+                <input type="text" class="form-control" id="search-input" placeholder="Enter city" />
+              </div>
+              <div class="col-md">
+                <button type="submit" class="btn btn-success go">Go</button>
+                <button type="button" class="btn btn-outline-info geolocation"><i class="fas fa-globe"></i></button>
+              </div>
+              <div class="col-md">
+                <button type="button" class="btn btn-light" id="degrees-link">ºC / ºF</button>
+              </div>
+            </form>
+      <br />
+      <br />
+      <div class="row align-items-center days0">
+      <div class="col-md place">
+        <h2 id="place"></h2>
+        <div id="description"></div>
+        <div id="date-time"></div>
+      </div>
+      <div class="col-md today">
+        <span id="today">Today</span>
+        <br />
+        <i class="fas fa-cloud-showers-heavy"></i> <span class="temp" id="temp-day1">5</span><span class="unit">ºC</span>
+        <div class="humid-wind"><span id="humidity"></span>%, <span id="wind"></span>km/h</div>
+      </div>
+      </div>
+      <br />
+      <div class="row align-items-center days1">
+        <div class="col-md">
+          Sunday
+          <br />
+          <i class="fas fa-wind"></i> <span class="temp" id="temp-day2">0</span><span class="unit">ºC</span>
+        </div>
+        <div class="col-md">
+          Monday
+          <br />
+          <i class="fas fa-snowflake"></i> <span class="temp" id="temp-day3">-5</span><span class="unit">ºC</span>
+        </div>
+      </div>
+      <br />
+      <div class="row align-items-center days2">
+        <div class="col-md">
+          Tuesday
+          <br />
+          <i class="fas fa-cloud-rain"></i> <span class="temp" id="temp-day4">2</span><span class="unit">ºC</span>
+        </div>
+        <div class="col-md">
+          Wednesday
+          <br />
+          <i class="fas fa-cloud-sun-rain"></i> <span class="temp" id="temp-day5">5</span><span class="unit">ºC</span>
+        </div>
+      </div>
+      <br />
+      <div class="row align-items-center days2">
+        <div class="col-md">
+          Thursday
+          <br />
+          <i class="fas fa-cloud-sun"></i> <span class="temp" id="temp-day6">8</span><span class="unit">ºC</span>
+        </div>
+        <div class="col-md">
+          Friday
+          <br />
+          <i class="fas fa-sun"></i> <span class="temp" id="temp-day7">10</span><span class="unit">ºC</span>
+        </div>
+        </div>
+      </div>
+    </div>
+    <footer><a href="https://github.com/chiodicg/Weather-app" target="_blank">Open-source code</a> by Carla G. Chiodi</footer>
+    <script src="src/index.js"></script>
+  </body>
+</html>

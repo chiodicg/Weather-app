@@ -91,3 +91,7 @@ footer {
   color: #22566b;
   text-align: center;
 }
+
+#description {
+  text-transform: capitalize;
+}

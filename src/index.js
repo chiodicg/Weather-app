@@ -1,6 +1,8 @@
 //To appear the current date
-let now = new Date();
-let days = [
+
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let days = [
   "Sunday",
   "Monday",
   "Tuesday",
@@ -9,14 +11,12 @@ let days = [
   "Friday",
   "Saturday"
 ];
-let day = days[now.getDay()];
-let hour = now.getHours(now);
+let day = days[date.getDay()];
+let hour = date.getHours(timestamp);
 if (hour < 10) {hour = `0${hour}`}
-let minutes = now.getMinutes(now);
+let minutes = date.getMinutes(timestamp);
 if (minutes < 10) {minutes = `0${minutes}`}
-function formatDate() {
-  let dateTime = document.querySelector("#date-time");
-  dateTime.innerHTML = `${day}, ${hour}:${minutes}`;
+  return `${day}, ${hour}:${minutes}`;
 }
 formatDate();
 
@@ -24,10 +24,12 @@ formatDate();
 function showTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
   document.querySelector("#place").innerHTML = response.data.name;
-  document.querySelector("#description").innerHTML = response.data.weather[0].main;
+  document.querySelector("#description").innerHTML = response.data.weather[0].description;
   document.querySelector("#temp-day1").innerHTML = temperature;
   document.querySelector("#humidity-day1").innerHTML = Math.round(response.data.main.humidity);
   document.querySelector("#wind-day1").innerHTML = Math.round(response.data.wind.speed);
+  let dateTime = document.querySelector("#date-time");
+  dateTime.innerHTML = formatDate(response.data.dt * 1000)
         }
 
 function search(city) {

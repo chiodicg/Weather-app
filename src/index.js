@@ -12,9 +12,9 @@ function formatDate(timestamp) {
   "Saturday"
 ];
 let day = days[date.getDay()];
-let hour = date.getHours(timestamp);
+let hour = date.getHours();
 if (hour < 10) {hour = `0${hour}`}
-let minutes = date.getMinutes(timestamp);
+let minutes = date.getMinutes();
 if (minutes < 10) {minutes = `0${minutes}`}
   return `${day}, ${hour}:${minutes}`;
 }
@@ -30,6 +30,8 @@ function showTemperature(response) {
   document.querySelector("#wind-day1").innerHTML = Math.round(response.data.wind.speed);
   let dateTime = document.querySelector("#date-time");
   dateTime.innerHTML = formatDate(response.data.dt * 1000)
+  document.querySelector("#icon-day1").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
+  document.querySelector("#icon-day1").setAttribute("alt", response.data.weather[0].description)
         }
 
 function search(city) {

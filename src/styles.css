@@ -24,14 +24,6 @@ footer {
   margin-top: 30px;
 }
 
-#date-time,
-#description {
-  color: #22566b;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  text-align: center;
-}
-
 .today,
 .days1,
 .days2,
@@ -61,30 +53,6 @@ footer {
   border: 1px solid #377792;
 }
 
-.fa-cloud-showers-heavy {
-  color: #828e93;
-}
-
-.fa-cloud-sun {
-  color: #f7c07e;
-}
-
-.fa-sun {
-  color: #f49200;
-}
-
-.fa-snowflake {
-  color: #4b7e96;
-}
-
-.fa-wind {
-  color: #91b4c6;
-}
-
-.fa-cloud-sun-rain {
-  color: #ead891;
-}
-
 .humid-wind {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 15px;
@@ -94,4 +62,12 @@ footer {
 
 #description {
   text-transform: capitalize;
+}
+
+#date-time,
+#description {
+  color: #22566b;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  text-align: center;
 }

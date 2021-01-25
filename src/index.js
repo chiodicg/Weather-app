@@ -16,7 +16,7 @@ let minutes = now.getMinutes(now);
 if (minutes < 10) {minutes = `0${minutes}`}
 function formatDate() {
   let dateTime = document.querySelector("#date-time");
-  dateTime.innerHTML = `${day} ${hour}:${minutes}`;
+  dateTime.innerHTML = `${day}, ${hour}:${minutes}`;
 }
 formatDate();
 
@@ -26,8 +26,8 @@ function showTemperature(response) {
   document.querySelector("#place").innerHTML = response.data.name;
   document.querySelector("#description").innerHTML = response.data.weather[0].main;
   document.querySelector("#temp-day1").innerHTML = temperature;
-  document.querySelector("#humidity").innerHTML = Math.round(response.data.main.humidity);
-  document.querySelector("#wind").innerHTML = Math.round(response.data.wind.speed);
+  document.querySelector("#humidity-day1").innerHTML = Math.round(response.data.main.humidity);
+  document.querySelector("#wind-day1").innerHTML = Math.round(response.data.wind.speed);
         }
 
 function search(city) {

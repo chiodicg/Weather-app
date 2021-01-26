@@ -50,6 +50,7 @@ function showForecast(response) {
 }
 //Show current weather
 function showTemperature(response) {
+  changeToCelsius();
   celsiusTemperature = Math.round(response.data.main.temp);
   celsiusMax = Math.round(response.data.main.temp_max);
   celsiusMin = Math.round(response.data.main.temp_min);
@@ -109,8 +110,7 @@ function changeToFahrentheit(event) {
   degreesButton.addEventListener("click", changeToCelsius);
 }
 
-function changeToCelsius (event) {
-  event.preventDefault();
+function changeToCelsius(event) {
   let temperatureElement = document.querySelector("#temp-day1");
   temperatureElement.innerHTML = celsiusTemperature;
   document.querySelector("#max-day1").innerHTML = `Max: ${celsiusMax}`;

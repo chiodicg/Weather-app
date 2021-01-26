@@ -37,12 +37,12 @@ function showForecast(response) {
           <div class="col-md">
             ${forecastDate(forecast.dt * 1000)}
             <br />
-            <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="${forecast.weather[0].description}" class="forecast-icon"> <div class="temp" id="max-min"> Max: ${Math.round(forecast.temp.max)}<span class="unit">ºC</span>, Min: ${Math.round(forecast.temp.min)}<span class="unit">ºC</span></div>
+            <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="${forecast.weather[0].description}" class="forecast-icon"> <div class="temp" id="max-min"> Max: ${Math.round(forecast.temp.max)}ºC, Min: ${Math.round(forecast.temp.min)}ºC</div>
           </div>
           <div class="col-md">
             ${forecastDate(forecast2.dt * 1000)}
             <br />
-            <img src="http://openweathermap.org/img/wn/${forecast2.weather[0].icon}@2x.png" alt="${forecast2.weather[0].description}" class="forecast-icon"> <div class="temp" id="max-min"> Max: ${Math.round(forecast2.temp.max)}<span class="unit">ºC</span>, Min: ${Math.round(forecast2.temp.min)}<span class="unit">ºC</span></div>
+            <img src="http://openweathermap.org/img/wn/${forecast2.weather[0].icon}@2x.png" alt="${forecast2.weather[0].description}" class="forecast-icon"> <div class="temp" id="max-min"> Max: ${Math.round(forecast2.temp.max)}ºC, Min: ${Math.round(forecast2.temp.min)}ºC</div>
           </div>
         </div>
         <br />`;
@@ -50,15 +50,16 @@ function showForecast(response) {
 }
 //Show current weather
 function showTemperature(response) {
-  let temperature = Math.round(response.data.main.temp);
   celsiusTemperature = Math.round(response.data.main.temp);
+  celsiusMax = Math.round(response.data.main.temp_max);
+  celsiusMin = Math.round(response.data.main.temp_min);
   document.querySelector("#place").innerHTML = response.data.name;
   document.querySelector("#description").innerHTML = response.data.weather[0].description;
-  document.querySelector("#temp-day1").innerHTML = temperature;
+  document.querySelector("#temp-day1").innerHTML = celsiusTemperature;
   document.querySelector("#humidity-day1").innerHTML = Math.round(response.data.main.humidity);
   document.querySelector("#wind-day1").innerHTML = Math.round(response.data.wind.speed);
-  document.querySelector("#max-day1").innerHTML = `Max: ${Math.round(response.data.main.temp_max)}`;
-  document.querySelector("#min-day1").innerHTML = `Min: ${Math.round(response.data.main.temp_min)}`;
+  document.querySelector("#max-day1").innerHTML = `Max: ${celsiusMax}`;
+  document.querySelector("#min-day1").innerHTML = `Min: ${celsiusMin}`;
   let dateTime = document.querySelector("#date-time");
   dateTime.innerHTML = formatDate(response.data.dt * 1000);
   document.querySelector("#icon-day1").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
@@ -97,15 +98,9 @@ search("Edinburgh")
 function changeToFahrentheit(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temp-day1");
-//  let temperatureElement = document.querySelectorAll(".temp");
-//  let temperatures = Number(temperatureElement.innerHTML);
-//  console.log(temperatureElement.innerHTML);
-//  [].forEach(el => {
-//    console.log(el)
-//    el.innerHTML = Math.round((el * 9)/5 + 32);
-//  })
   temperatureElement.innerHTML = Math.round((celsiusTemperature * 9)/5 + 32);
-
+  document.querySelector("#max-day1").innerHTML = `Max: ${Math.round((celsiusMax * 9)/5 + 32)}`;
+  document.querySelector("#min-day1").innerHTML = `Min: ${Math.round((celsiusMin * 9)/5 + 32)}`;
   let temperatureUnit = document.querySelectorAll(".unit"); 
   [].forEach.call(temperatureUnit, function(unit) {
     unit.innerHTML = `ºF`;
@@ -118,6 +113,8 @@ function changeToCelsius (event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temp-day1");
   temperatureElement.innerHTML = celsiusTemperature;
+  document.querySelector("#max-day1").innerHTML = `Max: ${celsiusMax}`;
+  document.querySelector("#min-day1").innerHTML = `Min: ${celsiusMin}`;
 
   let temperatureUnit = document.querySelectorAll(".unit"); 
   [].forEach.call(temperatureUnit, function(unit) {
@@ -128,6 +125,8 @@ function changeToCelsius (event) {
 }
 
 let celsiusTemperature = null;
+let celsiusMin = null;
+let celsiusMax = null;
 
 let degreesButton = document.querySelector("#degrees-link");
 degreesButton.addEventListener("click", changeToFahrentheit);

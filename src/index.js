@@ -1,6 +1,15 @@
-//To appear the current date
-
+//Show current date and forcast date
 function formatDate(timestamp) {
+  let date = new Date(timestamp);
+  let hour = date.getHours();
+  if (hour < 10) {hour = `0${hour}`}
+  let minutes = date.getMinutes();
+  if (minutes < 10) {minutes = `0${minutes}`}
+  return `${forecastDate(timestamp)}, ${hour}:${minutes}`;
+}
+formatDate();
+
+function forecastDate(timestamp) {
   let date = new Date(timestamp);
   let days = [
   "Sunday",
@@ -10,17 +19,36 @@ function formatDate(timestamp) {
   "Thursday",
   "Friday",
   "Saturday"
-];
-let day = days[date.getDay()];
-let hour = date.getHours();
-if (hour < 10) {hour = `0${hour}`}
-let minutes = date.getMinutes();
-if (minutes < 10) {minutes = `0${minutes}`}
-  return `${day}, ${hour}:${minutes}`;
+  ];
+  let day = days[date.getDay()];
+  return `${day}`;
 }
-formatDate();
 
-//Search engine and appear city and temperature
+//Show 6-day forecast
+function showForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+  let forecast2 = null;
+  for (let index = 1; index < 7; index+=2) {
+    forecast = response.data.daily[index];
+    forecast2 = response.data.daily[index+1];
+    forecastElement.innerHTML += `<div class="row align-items-center forecast">
+          <div class="col-md">
+            ${forecastDate(forecast.dt * 1000)}
+            <br />
+            <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="${forecast.weather[0].description}" class="forecast-icon"> <div class="temp" id="max-min"> Max: ${Math.round(forecast.temp.max)}<span class="unit">ºC</span>, Min: ${Math.round(forecast.temp.min)}<span class="unit">ºC</span></div>
+          </div>
+          <div class="col-md">
+            ${forecastDate(forecast2.dt * 1000)}
+            <br />
+            <img src="http://openweathermap.org/img/wn/${forecast2.weather[0].icon}@2x.png" alt="${forecast2.weather[0].description}" class="forecast-icon"> <div class="temp" id="max-min"> Max: ${Math.round(forecast2.temp.max)}<span class="unit">ºC</span>, Min: ${Math.round(forecast2.temp.min)}<span class="unit">ºC</span></div>
+          </div>
+        </div>
+        <br />`;
+  }
+}
+//Show current weather
 function showTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
   celsiusTemperature = Math.round(response.data.main.temp);
@@ -29,12 +57,20 @@ function showTemperature(response) {
   document.querySelector("#temp-day1").innerHTML = temperature;
   document.querySelector("#humidity-day1").innerHTML = Math.round(response.data.main.humidity);
   document.querySelector("#wind-day1").innerHTML = Math.round(response.data.wind.speed);
+  document.querySelector("#max-day1").innerHTML = `Max: ${Math.round(response.data.main.temp_max)}`;
+  document.querySelector("#min-day1").innerHTML = `Min: ${Math.round(response.data.main.temp_min)}`;
   let dateTime = document.querySelector("#date-time");
-  dateTime.innerHTML = formatDate(response.data.dt * 1000)
-  document.querySelector("#icon-day1").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`)
-  document.querySelector("#icon-day1").setAttribute("alt", response.data.weather[0].description)
+  dateTime.innerHTML = formatDate(response.data.dt * 1000);
+  document.querySelector("#icon-day1").setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+  document.querySelector("#icon-day1").setAttribute("alt", response.data.weather[0].description);
+  let lat = response.data.coord.lat;
+  let lon = response.data.coord.lon;
+  let apiKey = "7de7d337ce8802b808862965eb088195";
+  let units = "metric"
+  let apiForecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely,alerts&appid=${apiKey}&units=${units}`;
+  axios.get(apiForecastUrl).then(showForecast);
         }
-
+//Search for city
 function search(city) {
     let apiKey = "7de7d337ce8802b808862965eb088195";
     let units = "metric"
@@ -51,13 +87,13 @@ function handleSearch(event) {
     alert("Please, type a city.")
   }
 }
+
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSearch);
 search("Edinburgh")
 
 
-
-//Celsius to Fahrenheit
+//Celsius-Fahrenheit conversion
 function changeToFahrentheit(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#temp-day1");
@@ -98,8 +134,8 @@ degreesButton.addEventListener("click", changeToFahrentheit);
 
 //Current location button
 function getPosition(position) {
-    let lat = position.coords.latitude;
-    let lon = position.coords.longitude;
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
     let apiKey = "7de7d337ce8802b808862965eb088195";
     let units = "metric"
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;

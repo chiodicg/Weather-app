@@ -14,7 +14,19 @@ h2,
 footer {
   color: #22566b;
   font-family: Arial, Helvetica, sans-serif;
+  margin: 15px;
   text-align: center;
+}
+footer a {
+  color: #2982a5;
+}
+
+footer a:hover {
+  color: #2982a5;
+}
+
+footer a:visited {
+  color: #22566b;
 }
 .container {
   border: 1px solid linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
@@ -25,9 +37,7 @@ footer {
 }
 
 .today,
-.days1,
-.days2,
-.days3 {
+.forecast {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
   color: #22566b;
@@ -55,7 +65,7 @@ footer {
 
 .humid-wind {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 15px;
+  font-size: 20px;
   color: #22566b;
   text-align: center;
 }
@@ -69,5 +79,14 @@ footer {
   color: #22566b;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 20px;
+  text-align: center;
+}
+
+#max-min,
+#max-min-day1,
+.forecast .unit {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  color: #22566b;
   text-align: center;
 }

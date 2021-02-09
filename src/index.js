@@ -33,16 +33,17 @@ function showForecast(response) {
   for (let index = 1; index < 7; index+=2) {
     forecast = response.data.daily[index];
     forecast2 = response.data.daily[index+1];
+    console.log(forecast)
     forecastElement.innerHTML += `<div class="row align-items-center forecast">
           <div class="col-md">
             ${forecastDate(forecast.dt * 1000)}
             <br />
-            <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="${forecast.weather[0].description}" class="forecast-icon"> <div class="temp" id="max-min"> Max: ${Math.round(forecast.temp.max)}ºC, Min: ${Math.round(forecast.temp.min)}ºC</div>
+            <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="${forecast.weather[0].description}" class="forecast-icon"> ${Math.round(forecast.temp.day)}ºC <div class="temp" id="max-min"> Max: ${Math.round(forecast.temp.max)}ºC, Min: ${Math.round(forecast.temp.min)}ºC</div>
           </div>
           <div class="col-md">
             ${forecastDate(forecast2.dt * 1000)}
             <br />
-            <img src="http://openweathermap.org/img/wn/${forecast2.weather[0].icon}@2x.png" alt="${forecast2.weather[0].description}" class="forecast-icon"> <div class="temp" id="max-min"> Max: ${Math.round(forecast2.temp.max)}ºC, Min: ${Math.round(forecast2.temp.min)}ºC</div>
+            <img src="http://openweathermap.org/img/wn/${forecast2.weather[0].icon}@2x.png" alt="${forecast2.weather[0].description}" class="forecast-icon"> ${Math.round(forecast2.temp.day)}ºC <div class="temp" id="max-min"> Max: ${Math.round(forecast2.temp.max)}ºC, Min: ${Math.round(forecast2.temp.min)}ºC</div>
           </div>
         </div>
         <br />`;

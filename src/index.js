@@ -35,20 +35,23 @@ function showForecast(response) {
     forecast2 = response.data.daily[index+1];
     console.log(forecast)
     forecastElement.innerHTML += `<div class="row align-items-center forecast">
-          <div class="col-md">
-            ${forecastDate(forecast.dt * 1000)}
-            <br />
-            <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="${forecast.weather[0].description}" class="forecast-icon"> ${Math.round(forecast.temp.day)}ºC <div class="temp" id="max-min"> Max: ${Math.round(forecast.temp.max)}ºC, Min: ${Math.round(forecast.temp.min)}ºC</div>
-          </div>
-          <div class="col-md">
-            ${forecastDate(forecast2.dt * 1000)}
-            <br />
-            <img src="http://openweathermap.org/img/wn/${forecast2.weather[0].icon}@2x.png" alt="${forecast2.weather[0].description}" class="forecast-icon"> ${Math.round(forecast2.temp.day)}ºC <div class="temp" id="max-min"> Max: ${Math.round(forecast2.temp.max)}ºC, Min: ${Math.round(forecast2.temp.min)}ºC</div>
-          </div>
-        </div>
-        <br />`;
+    <div class="col-md">
+    ${forecastDate(forecast.dt * 1000)}
+    <br />
+    <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="${forecast.weather[0].description}" class="forecast-icon"> ${Math.round(forecast.temp.day)}ºC <div class="temp" id="max-min"> Max: ${Math.round(forecast.temp.max)}ºC, Min: ${Math.round(forecast.temp.min)}ºC</div>
+    </div>
+    <div class="col-md">
+    ${forecastDate(forecast2.dt * 1000)}
+    <br />
+    <img src="http://openweathermap.org/img/wn/${forecast2.weather[0].icon}@2x.png" alt="${forecast2.weather[0].description}" class="forecast-icon"> ${Math.round(forecast2.temp.day)}ºC <div class="temp" id="max-min"> Max: ${Math.round(forecast2.temp.max)}ºC, Min: ${Math.round(forecast2.temp.min)}ºC</div>
+    </div>
+    </div>
+    <br />`;
   }
 }
+let apiKey = "504bab1897b409625441ce1c1c7e6034";
+let units = "metric"
+
 //Show current weather
 function showTemperature(response) {
   changeToCelsius();
@@ -68,15 +71,11 @@ function showTemperature(response) {
   document.querySelector("#icon-day1").setAttribute("alt", response.data.weather[0].description);
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
-  let apiKey = "7de7d337ce8802b808862965eb088195";
-  let units = "metric"
   let apiForecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=hourly,minutely,alerts&appid=${apiKey}&units=${units}`;
   axios.get(apiForecastUrl).then(showForecast);
         }
 //Search for city
 function search(city) {
-    let apiKey = "7de7d337ce8802b808862965eb088195";
-    let units = "metric"
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
     axios.get(apiUrl).then(showTemperature);
 }
@@ -136,8 +135,6 @@ degreesButton.addEventListener("click", changeToFahrentheit);
 function getPosition(position) {
     lat = position.coords.latitude;
     lon = position.coords.longitude;
-    let apiKey = "7de7d337ce8802b808862965eb088195";
-    let units = "metric"
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
     axios.get(apiUrl).then(showTemperature);
 }

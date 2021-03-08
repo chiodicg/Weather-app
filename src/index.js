@@ -49,7 +49,7 @@ function showForecast(response) {
     <br />`;
   }
 }
-let apiKey = config.API_KEY;
+let apiKey = process.env.API_KEY;
 let units = "metric"
 
 //Show current weather
